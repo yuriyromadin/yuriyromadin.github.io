@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    Website redirects after migrating to another domain - Yuriy Romadin
+    
+  </title>
+
+  <meta name="description" content="Imagine you need to migrate your old website to the new domain name. For example, your old blog was located at blog.example.com, but now it needs to be under...">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/s3-static-website-redirect">
+  <link rel="alternate" type="application/rss+xml" title="Yuriy Romadin" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/">Yuriy Romadin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<header class="masthead">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>Website redirects after migrating to another domain</h1>
+          
+          <span class="meta">Posted by
+            
+            Yuriy Romadin
+            
+            on August 03, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <p>Imagine you need to migrate your old website to the new domain name.
+For example, your old blog was located at blog.example.com, but now it needs to
+be under your main domain name: example.com/blog</p>
+
+<p>In order to save your hard earned position in search, you have to set up correct
+redirects from old website to the new one:</p>
+
+<p><a href="#">blog.example.com/best-recipes/</a></p>
+
+<p>becomes</p>
+
+<p><a href="#">example.com/blog/best-recipes/</a></p>
+
+<p>But how would you set up this quickly and painlessly?</p>
+
+<p>Obvious and correct solution would be set up those redirecrts directly on the
+new web server.</p>
+
+<p>But what if you don’t have access to the new server configuration or don’t want to fiddle with the settings on it?</p>
+
+<p>You can of course, use numerous online solutions, paid or free, that offer this type of functionality, but free services can dissaper anytime and paid will just burn a hole in your pocket.</p>
+
+<h2 id="amazon-to-the-rescue">Amazon to the rescue!</h2>
+
+<p>As you probably know, Amazon not only the world’s largest retailer, but they also provide web services.
+We can take advantage of <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html">S3’s static website functionality</a>.</p>
+
+<p>It allows you to host static website for almost for free (typically, it will cost around $1/month).</p>
+
+<h2 id="setup">Setup</h2>
+
+<ol>
+  <li>Sign in to the AWS Management Console and open the <a href="https://console.aws.amazon.com/s3/">Amazon S3 console</a>.</li>
+  <li>In the list, choose the bucket that you want to use for your hosted website.</li>
+  <li>Choose the <strong>Properties</strong> tab.</li>
+  <li>Choose <strong>Static website hosting</strong>, and then choose <strong>Use this bucket to host a website</strong>.</li>
+</ol>
+
+<p><img src="http://localhost:4000/assets/img/staticwebsitehosting.png" alt="My helpful screenshot" /></p>
+
+<h3 id="where-the-magic-happens">Where the magic happens</h3>
+
+<p>You may notice that there’s special field, called <em>Redirection rules</em> and this is what we are looking for!</p>
+
+<p>The field syntax looks complex on the first glance, but is pretty trivial:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;RoutingRules&gt;</span>
+  <span class="nt">&lt;RoutingRule&gt;</span>
+    <span class="nt">&lt;Condition&gt;</span>
+      <span class="nt">&lt;KeyPrefixEquals&gt;</span>best-recipes/<span class="nt">&lt;/KeyPrefixEquals&gt;</span>
+    <span class="nt">&lt;/Condition&gt;</span>
+    <span class="nt">&lt;Redirect&gt;</span>
+      <span class="nt">&lt;HostName&gt;</span>example.com<span class="nt">&lt;/HostName&gt;</span>
+      <span class="nt">&lt;ReplaceKeyPrefixWith&gt;</span>blog/best-recipes/<span class="nt">&lt;/ReplaceKeyPrefixWith&gt;</span>
+    <span class="nt">&lt;/Redirect&gt;</span>
+  <span class="nt">&lt;/RoutingRule&gt;</span>
+<span class="nt">&lt;/RoutingRules&gt;</span></code></pre></figure>
+
+<p>It’s pretty basic XML syntax, and you can add as many <em>RoutingRule</em>’s as you wish:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;RoutingRules&gt;</span>
+
+  <span class="nt">&lt;RoutingRule&gt;</span>
+    <span class="nt">&lt;Condition&gt;</span>
+      <span class="nt">&lt;KeyPrefixEquals&gt;</span>best-recipes/<span class="nt">&lt;/KeyPrefixEquals&gt;</span>
+    <span class="nt">&lt;/Condition&gt;</span>
+    <span class="nt">&lt;Redirect&gt;</span>
+      <span class="nt">&lt;HostName&gt;</span>example.com<span class="nt">&lt;/HostName&gt;</span>
+      <span class="nt">&lt;ReplaceKeyPrefixWith&gt;</span>blog/best-recipes/<span class="nt">&lt;/ReplaceKeyPrefixWith&gt;</span>
+    <span class="nt">&lt;/Redirect&gt;</span>
+  <span class="nt">&lt;/RoutingRule&gt;</span>
+
+  <span class="nt">&lt;RoutingRule&gt;</span>
+    <span class="nt">&lt;Condition&gt;</span>
+      <span class="nt">&lt;KeyPrefixEquals&gt;</span>worst-recipes/<span class="nt">&lt;/KeyPrefixEquals&gt;</span>
+    <span class="nt">&lt;/Condition&gt;</span>
+    <span class="nt">&lt;Redirect&gt;</span>
+      <span class="nt">&lt;HostName&gt;</span>example.com<span class="nt">&lt;/HostName&gt;</span>
+      <span class="nt">&lt;ReplaceKeyPrefixWith&gt;</span>blog/worst-recipes/<span class="nt">&lt;/ReplaceKeyPrefixWith&gt;</span>
+    <span class="nt">&lt;/Redirect&gt;</span>
+  <span class="nt">&lt;/RoutingRule&gt;</span>
+
+<span class="nt">&lt;/RoutingRules&gt;</span></code></pre></figure>
+
+<h3 id="finishing-touches">Finishing touches</h3>
+
+<p>Now, when everything is set up, last step is to point your domain to your new static website.</p>
+
+
+      <hr>
+
+      <div class="clearfix">
+
+        
+        
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          
+          <li class="list-inline-item">
+            <a href="https://www.twitter.com/yuriyromadin">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li class="list-inline-item">
+            <a href="https://www.facebook.com/yuriyromadin">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/yuriyromadin">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Yuriy Romadin 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

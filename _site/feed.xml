@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.3">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-08-05T19:20:10+03:00</updated><id>http://localhost:4000/</id><title type="html">Yuriy Romadin</title><subtitle>Web developer and problem solver</subtitle><author><name>Yuriy Romadin</name></author><entry><title type="html">Website redirects after migrating to another domain</title><link href="http://localhost:4000/s3-static-website-redirect" rel="alternate" type="text/html" title="Website redirects after migrating to another domain" /><published>2018-08-03T19:03:46+03:00</published><updated>2018-08-03T19:03:46+03:00</updated><id>http://localhost:4000/this-is-sparta</id><content type="html" xml:base="http://localhost:4000/s3-static-website-redirect">&lt;p&gt;Imagine you need to migrate your old website to the new domain name.
+For example, your old blog was located at blog.example.com, but now it needs to
+be under your main domain name: example.com/blog&lt;/p&gt;
+
+&lt;p&gt;In order to save your hard earned position in search, you have to set up correct
+redirects from old website to the new one:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#&quot;&gt;blog.example.com/best-recipes/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;becomes&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#&quot;&gt;example.com/blog/best-recipes/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;But how would you set up this quickly and painlessly?&lt;/p&gt;
+
+&lt;p&gt;Obvious and correct solution would be set up those redirecrts directly on the
+new web server.&lt;/p&gt;
+
+&lt;p&gt;But what if you don’t have access to the new server configuration or don’t want to fiddle with the settings on it?&lt;/p&gt;
+
+&lt;p&gt;You can of course, use numerous online solutions, paid or free, that offer this type of functionality, but free services can dissaper anytime and paid will just burn a hole in your pocket.&lt;/p&gt;
+
+&lt;h2 id=&quot;amazon-to-the-rescue&quot;&gt;Amazon to the rescue!&lt;/h2&gt;
+
+&lt;p&gt;As you probably know, Amazon not only the world’s largest retailer, but they also provide web services.
+We can take advantage of &lt;a href=&quot;https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html&quot;&gt;S3’s static website functionality&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;It allows you to host static website for almost for free (typically, it will cost around $1/month).&lt;/p&gt;
+
+&lt;h2 id=&quot;setup&quot;&gt;Setup&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Sign in to the AWS Management Console and open the &lt;a href=&quot;https://console.aws.amazon.com/s3/&quot;&gt;Amazon S3 console&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;In the list, choose the bucket that you want to use for your hosted website.&lt;/li&gt;
+  &lt;li&gt;Choose the &lt;strong&gt;Properties&lt;/strong&gt; tab.&lt;/li&gt;
+  &lt;li&gt;Choose &lt;strong&gt;Static website hosting&lt;/strong&gt;, and then choose &lt;strong&gt;Use this bucket to host a website&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://localhost:4000/assets/img/staticwebsitehosting.png&quot; alt=&quot;My helpful screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;where-the-magic-happens&quot;&gt;Where the magic happens&lt;/h3&gt;
+
+&lt;p&gt;You may notice that there’s special field, called &lt;em&gt;Redirection rules&lt;/em&gt; and this is what we are looking for!&lt;/p&gt;
+
+&lt;p&gt;The field syntax looks complex on the first glance, but is pretty trivial:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;RoutingRules&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;RoutingRule&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Condition&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;KeyPrefixEquals&amp;gt;&lt;/span&gt;best-recipes/&lt;span class=&quot;nt&quot;&gt;&amp;lt;/KeyPrefixEquals&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Condition&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Redirect&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;HostName&amp;gt;&lt;/span&gt;example.com&lt;span class=&quot;nt&quot;&gt;&amp;lt;/HostName&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;ReplaceKeyPrefixWith&amp;gt;&lt;/span&gt;blog/best-recipes/&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ReplaceKeyPrefixWith&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Redirect&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/RoutingRule&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/RoutingRules&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;It’s pretty basic XML syntax, and you can add as many &lt;em&gt;RoutingRule&lt;/em&gt;’s as you wish:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-xml&quot; data-lang=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;RoutingRules&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;RoutingRule&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Condition&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;KeyPrefixEquals&amp;gt;&lt;/span&gt;best-recipes/&lt;span class=&quot;nt&quot;&gt;&amp;lt;/KeyPrefixEquals&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Condition&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Redirect&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;HostName&amp;gt;&lt;/span&gt;example.com&lt;span class=&quot;nt&quot;&gt;&amp;lt;/HostName&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;ReplaceKeyPrefixWith&amp;gt;&lt;/span&gt;blog/best-recipes/&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ReplaceKeyPrefixWith&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Redirect&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/RoutingRule&amp;gt;&lt;/span&gt;
+
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;RoutingRule&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Condition&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;KeyPrefixEquals&amp;gt;&lt;/span&gt;worst-recipes/&lt;span class=&quot;nt&quot;&gt;&amp;lt;/KeyPrefixEquals&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Condition&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;Redirect&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;HostName&amp;gt;&lt;/span&gt;example.com&lt;span class=&quot;nt&quot;&gt;&amp;lt;/HostName&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;ReplaceKeyPrefixWith&amp;gt;&lt;/span&gt;blog/worst-recipes/&lt;span class=&quot;nt&quot;&gt;&amp;lt;/ReplaceKeyPrefixWith&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/Redirect&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/RoutingRule&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/RoutingRules&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h3 id=&quot;finishing-touches&quot;&gt;Finishing touches&lt;/h3&gt;
+
+&lt;p&gt;Now, when everything is set up, last step is to point your domain to your new static website.&lt;/p&gt;</content><author><name>Yuriy Romadin</name></author><summary type="html">Imagine you need to migrate your old website to the new domain name. For example, your old blog was located at blog.example.com, but now it needs to be under your main domain name: example.com/blog</summary></entry></feed>
