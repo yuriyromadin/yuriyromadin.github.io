@@ -94,3 +94,14 @@ It's pretty basic XML syntax, and you can add as many *RoutingRule*'s as you wis
 ### Finishing touches
 
 Now, when everything is set up, last step is to point your domain to your new static website.
+Easiest way is [when your bucket name is the same as your domain name.](https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingCustomURLs)
+
+
+{% highlight bash %}
+
+blog.example.com CNAME blog.example.com.s3-website-us-east-1.amazonaws.com
+
+{% endhighlight %}
+
+Now when users visit old link like this: [blog.example.com/best-recipes/](http://blog.example.com/best-recipes/), they will be instantly
+redirected (with the correct HTTP status code) to your new website [example.com/blog/best-recipes/](http://example.com/blog/best-recipes/)

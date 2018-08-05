@@ -59,7 +59,7 @@
   <div class="overlay"></div>
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="col-lg-10 col-md-10 mx-auto">
         <div class="post-heading">
           <h1>Website redirects after migrating to another domain</h1>
           
@@ -164,16 +164,19 @@ We can take advantage of <a href="https://docs.aws.amazon.com/AmazonS3/latest/de
 
 <h3 id="finishing-touches">Finishing touches</h3>
 
-<p>Now, when everything is set up, last step is to point your domain to your new static website.</p>
+<p>Now, when everything is set up, last step is to point your domain to your new static website.
+Easiest way is <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html#VirtualHostingCustomURLs">when your bucket name is the same as your domain name.</a></p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">blog.example.com CNAME blog.example.com.s3-website-us-east-1.amazonaws.com</code></pre></figure>
+
+<p>Now when users visit old link like this: <a href="http://blog.example.com/best-recipes/">blog.example.com/best-recipes/</a>, they will be instantly
+redirected (with the correct HTTP status code) to your new website <a href="http://example.com/blog/best-recipes/">example.com/blog/best-recipes/</a></p>
 
 
-      <hr>
 
       <div class="clearfix">
-
         
         
-
       </div>
 
     </div>
