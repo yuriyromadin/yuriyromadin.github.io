@@ -3,6 +3,8 @@ layout: post
 title:  "Website redirects after migrating to another domain"
 date:   2018-08-03 19:03:46 +0300
 permalink: s3-static-website-redirect
+comments: true
+background: /assets/img/staticwebsitehosting-background.jpg
 ---
 Imagine you need to migrate your old website to the new domain name.
 For example, your old blog was located at blog.example.com, but now it needs to

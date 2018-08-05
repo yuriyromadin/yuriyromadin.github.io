@@ -2,7 +2,7 @@
 layout: page
 title: About
 permalink: /about/
-background: '/assets/img/landing.jpg'
+background: /assets/img/landing.jpg
 ---
 
 ## Hello there, stranger!
