@@ -19,6 +19,7 @@ defaults:
 markdown: kramdown
 highlighter: rouge
 theme: jekyll-theme-clean-blog
+remote_theme: blackrockdigital/startbootstrap-clean-blog-jekyll
 plugins:
   - jekyll-feed
 
