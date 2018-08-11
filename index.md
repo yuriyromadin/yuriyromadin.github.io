@@ -1,4 +1,4 @@
 ---
 layout: home
-background: '/assets/img/landing.jpg'
+background: '/assets/img/hero.jpg'
 ---
