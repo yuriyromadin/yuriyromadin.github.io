@@ -6,3 +6,12 @@ h4 + p{
 .comments{
     padding-top: 2rem;
 }
+p > img{
+    max-width: 100%;
+    margin: 0 auto;
+    display: block;
+}
+
+header.masthead{
+    background-color: #b4b4b4;
+}

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>
+    How to enable picture-in-picture mode for Youtube on iPad - Yuriy Romadin
+    
+  </title>
+
+  <meta name="description" content="Since iOS 11, Apple introduced new feature for iPads, that let you use your apps while watching video in the small floating window.">
+
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="/assets/vendor/bootstrap/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="/assets/vendor/font-awesome/css/font-awesome.min.css">
+
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="canonical" href="http://localhost:4000/pip-for-youtube-on-ipad">
+  <link rel="alternate" type="application/rss+xml" title="Yuriy Romadin" href="/feed.xml">
+
+</head>
+
+
+  <body>
+
+    <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/">Yuriy Romadin</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Page Header -->
+
+<header class="masthead" style="background-image: url('/assets/img/pip-for-youtube-on-ipad.jpg')">
+
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <div class="post-heading">
+          <h1>How to enable picture-in-picture mode for Youtube on iPad</h1>
+          
+          <span class="meta">Posted by
+            
+            Yuriy Romadin
+            
+            on August 11, 2018</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 mx-auto">
+
+      <p>Since iOS 11, Apple introduced new feature for iPads, that let you use your
+apps while watching video in the small floating window.</p>
+
+<p>Unfortunately, Youtube did not add this functionality to their application for
+iPad. They force you to always use Youtube in the foreground. The only workaround
+is to launch two applications side by side using multitasking mode:</p>
+
+<p><img src="http://localhost:4000/assets/img/split-screen-mode.png" alt="Youtube multi tasking mode on iPad" /></p>
+
+<h2 id="the-problem">The problem</h2>
+<p>While split screen mode is useful and kinda solves our problem, and you can use
+all built-in apps in this mode, not all 3rd party apps support this mode.</p>
+
+<p>Also, as you can see from example above, a lot of screen estate is not used,
+especially when iPad’s in portrait mode.</p>
+
+<h2 id="solution">Solution?</h2>
+<p>Unfortunately, solution is not elegant enough, but it works!
+To use this “hack”, you will have to use Safari, instead of Youtube
+native application. I know, I know, the mobile UI of Youtube website is not
+good, but hey, it’s still usable.</p>
+
+<h3 id="step-1">Step 1:</h3>
+<p>You will need to create new bookmarklet - it’s a bookmark stored in a web browser
+that contains JavaScript commands that add new features to the browser.</p>
+
+<p>The Javascript code behind all this is super simple and only contains one line:</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'video'</span><span class="p">).</span><span class="nx">webkitEnterFullScreen</span><span class="p">();</span></code></pre></figure>
+
+<p>If you are not familiar with bookmarklets, just open Safari on your iPad or Mac computer and drag&amp;drop this link to your favourites bar:</p>
+
+<p><a href="javascript:(function(){document.querySelector('video').webkitEnterFullScreen()})();">Youtube FullScreen</a></p>
+
+<h3 id="step-2">Step 2:</h3>
+<p>That’s it! 😎 Just browse any Youtube video from your Safari browser, and when you are
+on the video page just click on “Youtube FullScreen” bookmark you just created.
+It will automatically open video in fullscreen mode, and from there you can
+press on picture-in-picture icon to minimize your video into floating video player.</p>
+
+<p>After that you can open any other application and your video will be floating on top of it:</p>
+
+<p><img src="http://localhost:4000/assets/img/picture-in-picture-on-ipad.png" alt="Youtube picture in picture mode for iPad" /></p>
+
+<p>Btw, did I tell you it works flawlessly both on iPad and your Mac computer?</p>
+
+<p><img src="http://localhost:4000/assets/img/youtube-picture-in-picture-on-macosx.png" alt="Youtube picture in picture mode for Mac OS X" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>Obviously this method won’t fit all use cases, but at least it gives you an option.</p>
+
+<p>There are a few pros and cons I want to mention:</p>
+
+<h3 id="pros">Pros</h3>
+<ul>
+  <li>You can launch any Youtube video in picture-in-picture mode and continue to use other applications while video is playing, even in the background.</li>
+  <li>Safari supports content blockers, so you can avoid ads during the video (don’t forget to support your favourite content creators in other ways, for example with donation).</li>
+  <li>You can change video player size, and even swipe it off from the screen, and video will still play in the background.</li>
+  <li>You get iOS/Mac OS X native video player with all the controls in all the right places.</li>
+</ul>
+
+<h3 id="cons">Cons</h3>
+<ul>
+  <li>You have to use Youtube mobile website version, which really is pain in the ass.</li>
+  <li>The maximum video quality is 720p.</li>
+  <li>If you keep native Youtube application, all Youtube links you click, will be opened in Youtube application, so you will have to make additional actions to open videos in Safari.</li>
+  <li>You loose Youtube’s auto-quality selection feature based on your current internet speed. So if you’re traveling and entering slow internet area, your video will stutter.</li>
+  <li>Other applications that run in the foreground may “steal your sound” and then your video will be paused (this happens everytime there’s ad with sound in the application)</li>
+</ul>
+
+
+      
+      <div class="comments">
+        <div id="disqus_thread"></div>
+        <script> (function() { var d = document, s = d.createElement('script'); s.src = 'https://romadin.disqus.com/embed.js'; s.setAttribute('data-timestamp', +new Date()); (d.head || d.body).appendChild(s);})();</script>
+      </div>
+      
+
+      <hr>
+
+      <div class="clearfix">
+        
+        <a class="btn btn-primary float-left" href="/s3-static-website-redirect" data-toggle="tooltip" data-placement="top" title="Website redirects after migrating to another domain">&larr; Previous<span class="d-none d-md-inline"> Post</span></a>
+        
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- Footer -->
+
+<hr>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <ul class="list-inline text-center">
+          
+          <li class="list-inline-item">
+            <a href="https://www.twitter.com/yuriyromadin">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li class="list-inline-item">
+            <a href="https://www.facebook.com/yuriyromadin">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li class="list-inline-item">
+            <a href="https://github.com/yuriyromadin">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="copyright text-muted">Copyright &copy; Yuriy Romadin 2018</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/startbootstrap-clean-blog/js/clean-blog.min.js"></script>
+
+<script src="/assets/scripts.js"></script>
+
+
+
+
+  </body>
+
+</html>

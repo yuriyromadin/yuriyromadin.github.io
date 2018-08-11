@@ -42,7 +42,7 @@ It allows you to host static website for almost for free (typically, it will cos
 3. Choose the **Properties** tab.
 4. Choose **Static website hosting**, and then choose **Use this bucket to host a website**.
 
-![My helpful screenshot]({{ "/assets/img/staticwebsitehosting.png" | absolute_url }})
+![AWS static website hosting]({{ "/assets/img/staticwebsitehosting.png" | absolute_url }})
 
 ### Where the magic happens
 

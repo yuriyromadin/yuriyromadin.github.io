@@ -155,3 +155,7 @@ footer .copyright { font-size: 14px; margin-bottom: 0; text-align: center; }
 h2 + p, h3 + p, h4 + p { margin-top: 1rem; }
 
 .comments { padding-top: 2rem; }
+
+p > img { max-width: 100%; margin: 0 auto; display: block; }
+
+header.masthead { background-color: #b4b4b4; }
