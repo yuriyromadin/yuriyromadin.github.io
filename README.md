@@ -1,1 +1,1 @@
-# yuriyromadin.github.io
+Yuriy Romadin personal website built with Sveltekit.
