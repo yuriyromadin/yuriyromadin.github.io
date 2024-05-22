@@ -4,9 +4,9 @@
 
 <section>
   <div>
-    <h1>Yuriy Romadin</h1>
+    <h1>Yuriy <br>Romadin</h1>
     <h2>
-      <span>CTO <span class="small">@</span> <a href="https://sellfy.com/" target="_blank">Sellfy</a></span>
+      <span>CTO <span class="small">@</span> <a href="https://sellfy.com/about/" target="_blank">Sellfy</a></span>
 
       <span class="socials">
         <a class="icon" href="https://www.linkedin.com/in/yuriyromadin/" aria-label="Yuriy Romadin's Linkedin profile" target="_blank">
@@ -44,16 +44,20 @@ section {
   .small {
     font-size: 18px;
   }
+  br {
+    display: none;
+  }
   a {
     color: inherit;
   }
   h1 {
-    font-size: 100px;
+    font-size: clamp(2rem, 12.5vw, 6rem);
     text-transform: uppercase;
     text-shadow: 1px 0px 30px rgba(255, 255, 255, .2);
     margin: 0;
   }
   h2 {
+    font-size: clamp(1rem, 0.5vw, 1.25rem);
     margin: 0;
     display: flex;
     align-items: center;
@@ -124,5 +128,20 @@ section {
     }
   }
 
+  @media (max-width: 600px) {
+    h1{
+      margin-bottom: 1.5rem;
+    }
+    .socials {
+      gap: 1.5rem;
+    }
+    br {
+      display: block;
+    }
+    .shape {
+      width: 85vw;
+      height: 85vw;
+    }
+  }
 
 </style>
