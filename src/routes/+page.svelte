@@ -1,5 +1,6 @@
 <svelte:head>
   <title>Yuriy Romadin - CTO at Sellfy</title>
+  <meta name="description" content="CTO at Sellfy in Riga, Latvia since June 2022, overseeing technology architecture, leading the engineering team, and making tech-related executive decisions.">
 </svelte:head>
 
 <section>
