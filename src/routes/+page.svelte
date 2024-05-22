@@ -134,6 +134,7 @@ section {
     }
     h1{
       margin-bottom: 1.5rem;
+      font-size: clamp(2rem, 20vw, 6rem);
     }
     .socials {
       gap: 1.5rem;
@@ -142,8 +143,8 @@ section {
       display: block;
     }
     .shape {
-      width: 85vw;
-      height: 85vw;
+      width: 95vw;
+      height: 95vw;
     }
   }
 
