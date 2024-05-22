@@ -129,6 +129,9 @@ section {
   }
 
   @media (max-width: 600px) {
+    section {
+      height: 80vh;
+    }
     h1{
       margin-bottom: 1.5rem;
     }
